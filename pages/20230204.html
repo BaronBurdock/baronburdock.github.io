@@ -1,0 +1,127 @@
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>BaronBurdock</title>
+		<link rel="stylesheet" href="../style.css">
+
+<!╌ THIS IS CODE NEEDED IN 000WEBHOST ╌>
+<style>
+.disclaimer {display: none;}
+</style>
+
+
+	</head>
+<body>
+    	<div id="navbar">
+
+		<a href="../index.html">HOME</a>
+		<a href="archive.html">ARCHIVE</a>
+		<a href="about.html">ABOUT</a>
+		<a href="contact.html">CONTACT</a>
+	</div>
+	<div class="content">
+
+<br>
+<h1 id="typingtext">$ BaronBurdock</h1>
+<br>
+
+<div class="grid">
+
+        <div class="col">
+
+<!- Start of Post -> 
+
+            <h2>2023 02 04: Nostr and Setting Up NIP-05</h2>
+<img src="https://i.imgur.io/RXr6Rwd.webp" alt="The Nostrich!!!">
+<p>
+I had largely forgotten about this blog until I started playing around with Nostr. This is my attempt to jot down my process in setting up a NIP-05 identifier, as well as provide a summary of what Nostr is. If this all sounds like tech gibberish, keep reading. For others, please skip to the bottom.
+</p>
+<h3>What is Nostr?</h3>
+<p>
+For many years, Twitter has been my preferred social media network. I enjoy interacting with others using short and concise posts, versus the walls of text that you find on Facebook. As much as I like Twitter, it comes with some serious drawbacks: it’s engineered to be the digital version of crack, its full of ads, and most importantly, it’s run by people who I generally believe are anti-human. Twitter is centrally controlled. Your data is lives at Twitter and if you speak outside of the party line you will you will find yourself suspended without any recourse. Although this sounds like standard content moderation, which is needed in any commercial venture, Twitter’s enforcement appears to largely arbitrary and is easily swayed by internal and external politics. 
+</p>
+<p>
+Years ago I discovered Mastodon, or more appropriately, the Fediverse, and liked what it had to offer. The Fediverse is an alternative to Twitter that attempts to solve these problems by allowing users to set up “instances” that federate, or communicate, with each other. If you have the money for a virtual private server and the technical know-how to setup software that is compatible with the Fediverse, you are now the CEO of your own social medial network. Moderate content as you please. In theory, diversity of instances allows users to join groups that more closely align with their views and interests. While an improvement over Twitter, the same dynamics still apply. The owner of an instance may choose to block, or not federate with other instances, essentially preventing users in the Fediverse from communicating. This is often done without those in the instance knowing what is blocked and what is not. Like Twitter, instances can be highly political. You can change instances and start over, but your data doesn’t come with with you.
+</p>
+<p>
+Nostr fixes this. For the uninitiated, Nostr stands for “Notes and Other Stuff Transmitted by Relays,” and is an open-source social media protocol (this is not a platform like Twitter, this is a protocol - think the email protocol SMTP). Being open source, anyone can inspect, modify, and distribute the software Nostr uses. Nostr does not rely on any central server, but instead uses a series of relays which distributes content. Users setup an “account” by generating a public key and private key (bitcoiners will be very familiar with this terminology). The private key is used to sign (or publish) messages and is the crucial part of your account ownership. The public key is what others see and can follow. This private key can be entered into various clients (think social media apps) which allow the user to interact with others using Nostr. 
+</p>
+<h3>NIP-05</h3>
+<p>
+Being decentralized, one of the challenges that Nostr faces is verification. When Jack Dorsey threw support behind Nostr, many fake “Jacks” arrived on Nostr all appearing to be the real person. Being centralized, Twitter has an advantage in that it can verify the real Jack and reject impostors. Nostr has a couples tools to address this, the most important is NIP-05. Similar to BIPS in Bitcoin, enhancements to Nostr are made through NIPs, or “Nostr Implementation Possibilities.” These enhancements are numbered and may or may not be implemented into Nostr-compatible relays and clients. Most clients and relays support NIP-05.
+</p>
+<p>
+NIP-05 is an enchancement to Nostr that attempts to verify users through the use of domain names. Anyone can set up an account name on Nostr that reads “Jack”, and most users do not have the time nor energy to differentiate various 63 character public keys, but most people can differentiate “Jack@no.str.cr” from “Jack@fakejacknostr.com.” When someone has setup a NIP-05 identifier, most clients will add a badge or check mark, similar to the “blue check” on Twitter. Note: just because someone has a NIP-05 and badge doesn’t automatically mean they are the real person. In the same manner that I could setup a fake email to trick someone, I could also go through the effort of setting up a fake account and fake NIP-05 identifier.  NIP-05 simply proves that either you own the domain name or used a service that allowed you to register. Domain names often cost money and time to set up, so this ultimately serves as a deterrent.
+</p>
+<h3>My Use of a Free Web Hosting Service</h3>
+<p>
+But what about using a free web hosting service for your NIP-05 identifier? Obviously I wouldn’t recommend this as free sites would seem more questionable and more likely to be used by bots, but it is an option. At the time of writing, this site used free web hosting (I intend to change that in the future). Here is my process, this would similar for most domains:
+</p>
+<p>
+Step 1: Create a text file named “nostr” and change the file type to “.json”.
+</p>
+<p>
+Step 2: Insert the following text inside your json file and then save.
+</p>
+<p>
+{<br>
+&emsp;"names": {<br>
+&emsp;&emsp;"&lt;insert your Nostr username&gt;": "&lt;insert your Nostr public key in hex format&gt;"<br>
+&emsp;}<br>
+}
+</p>
+<p>
+Please note, the username appears to be case sensitive. I initially had issues when the username I entered didn’t exactly match the user name I used in my client and what I put in the NIP identifier field. Just make sure all the cases match. Also, be sure to use your a hex version of your public key. If your public key begins with “npub”, it won’t work and needs to be converted.
+</p>
+<p>
+Step 3: Move the file to your domain so that it is located at &lt;domain&gt;/.well-known/nostr.json
+</p>
+<p>
+Step 4: Setup CORS permissions. On 000webhost.com I had the add the following to “.htaccess”
+</p>
+<p>
+Header set Access-Control-Allow-Origin "*"<br>
+Header set Access-Control-Allow-Methods "GET"
+</p>
+<p>
+Step 5: In your Nostr client, add the following to the NIP-05 field:
+</p>
+<p>
+&lt;insert your Nostr username&gt;@&lt;insert your domain&gt;
+</p>
+<p>
+Step 6: Go to your profile, it should indicate that you have been verified using some visual cue (usually a check mark)
+</p>
+<p>
+Your Nostr client will check your domain for your username and public key based on the information you provided. Because you needed access to your private key to make changes to you account within Nostr, and because you told your client to look to a domain you control for the matching information you provided, your client is able to verify (as best as possible) that you are in fact you. 
+</p>
+<p>
+I hope this long-winded post helped explain Nostr a little bit, as well as my method to add a NIP-05 identifier. I will make sure to add my Nostr public key to my contact information in case anyone is interested in reaching out over Nostr.
+
+            <p>  
+            </p>
+
+        </div>
+
+    </div>
+    
+</div>
+
+
+
+		</div>
+	</div>
+<div>
+	<br>
+        <footer class="text-center">
+
+© BaronBurdock 20XX
+
+        </footer>
+	</body>
+</html>
+
+

@@ -1,0 +1,167 @@
+/* {font-size:14pt;font-weight:normal;} */
+
+@media (min-width: 56em) {
+	.row {
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: row-reverse;
+	}
+	.col { flex-grow: 1; }
+}
+
+
+
+.col {
+	border: 6px double #33ff33;
+	padding: 1em;
+}
+
+
+
+img {
+        float: left;
+        width: 90%;
+        padding-top:0;
+        padding-right: 5%;
+        padding-bottom: 1em;
+        padding-left: 5%;
+}
+
+
+body {
+	margin: auto;
+	padding: 1em;
+	max-width: 56em;
+	font-family: "Courier New", sans-serif, monospace;
+	font-size: 1.25em;
+	color: #33ff33;
+	background: #282828;
+	word-wrap: break-word;
+}
+
+a {
+	text-decoration: none;
+	color: #33ff33;
+	font-weight: bold;
+	padding-right: 0.25em;
+}
+
+a:hover {color: #3D9314;}
+
+hr {
+	border-color: #33ff33;
+}
+.text-center {
+	text-align: center
+}
+
+h1 {
+	text-transform: uppercase;
+		color: #33ff33;
+		font-family: monospace;
+}
+
+
+
+
+
+
+
+
+
+
+/* This is Typing Text Code that appears */
+#typingtext::before {
+	content: " ";
+}
+@media (prefers-reduced-motion: no-preference) {
+	@keyframes flash {
+		50% { opacity: 0; }
+	}
+	@keyframes reveal {
+		from { width: 1em; } /* Width of ::before */
+		  to { width: 100%; }
+	}
+	#typingtext {
+		overflow: hidden;
+		white-space: nowrap;
+		animation: reveal 5s linear;
+		text-overflow: "▌";
+	}
+	#typingtext::after {
+		content: "▌";
+		animation: flash 0.5s step-end infinite;
+	}
+}
+
+
+.sourceCode {
+ color:#008000;
+}
+
+code > span.fl { 
+ color: #008000; 
+}
+
+ /* Style the navbar */
+#navbar {
+	overflow: hidden;
+	background-color: #33ff33;
+	color: #222;
+	z-index: 99;
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	border-radius: 0.25em;
+}
+
+#navbar a:hover {
+	background-color: #3D9314;
+}
+
+/* Navbar links */
+#navbar a {
+	float: left;
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px;
+	text-decoration: none;
+}
+
+/* Page content */
+.content {
+	padding-top: 5px;
+}
+
+
+blockquote {
+    border-left: 2px solid #33ff33;
+    padding: 0.5em;
+}	
+
+/* Mobile */
+@media (max-width: 768px) {
+	td {
+		display: block;
+	}
+}
+
+
+
+/* 000Webhost Code */
+img[alt*="000webhost"],
+img[alt*="000webhost"][style],
+img[src*="000webhost"],
+img[src*="000webhost"][style],
+body > div:nth-last-of-type(1)[style]{
+opacity: 0 !important;
+pointer-events:none !important;
+width: 0px !important;
+height: 0px !important;
+visibility:hidden !important;
+display:none !important;
+}
+
+
